@@ -62,26 +62,39 @@ class Player(sprite.Sprite):
         # Set the player's walking state
         self.walking = False
 
+    """ Move the player based on the given x and y coordinates.
+    
+    Args:
+        dx (int): The x coordinate.
+        dy (int): The y coordinate.
+        
+    Returns:
+        None
+    """
     def move(self, dx, dy):
-        self.images = self.images_walking
         self.rect.x += dx * self.speed
         self.rect.y += dy * self.speed
 
         # Update the player's image index to animate movement
         now = pygame.time.get_ticks()
         if now - self.last_update > self.animation_delay:
-            self.image_index = (self.image_index + 1) % len(self.images)
-            self.image = self.images[self.image_index]
+            self.image_index = (self.image_index + 1) % len(self.images_walking)
+            self.image = self.images_walking[self.image_index]
             self.last_update = now
 
         # Prevent the player from going out of the screen
         self.rect.x = max(0, min(self.rect.x, settings.SCREEN_WIDTH - settings.PLAYER_WIDTH))
         self.rect.y = max(0, min(self.rect.y, settings.SCREEN_HEIGHT - settings.PLAYER_HEIGHT))
 
+    """ Attack with the player.
+    
+    Args:
+        None
+        
+    Returns:
+        None
+    """
     def attack(self):
-        # Switch to attack images
-        self.images = self.images_attacking
-
         # Reset image index to start attack animation from the beginning
         self.image_index = 0
 
@@ -91,6 +104,14 @@ class Player(sprite.Sprite):
         # Set attacking flag to True
         self.attacking = True
 
+    """ Update the player's image based on the current animation.
+    
+    Args:
+        None
+        
+    Returns:
+        None
+    """
     def update(self):
         # Update player's image based on current animation
         now = pygame.time.get_ticks()
@@ -100,6 +121,6 @@ class Player(sprite.Sprite):
             self.last_update = now
 
             # If the attack animation has finished, switch back to walking images
-            if self.attacking and self.image_index == len(self.images) - 1:
+            if self.attacking and self.image_index == len(self.images_attacking) - 1:
                 self.images = self.images_walking
                 self.attacking = False
