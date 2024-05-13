@@ -19,14 +19,17 @@ class Player(sprite.Sprite):
                                  image.load(settings.PLAYER_IMAGE_ATTACK_PATH + "1.png"),
                                  image.load(settings.PLAYER_IMAGE_ATTACK_PATH + "2.png"),
                                  image.load(settings.PLAYER_IMAGE_ATTACK_PATH + "3.png")]
+
         self.image_index = 0
         self.image = self.images_walking[self.image_index]
         self.rect = self.image.get_rect()
         self.screen_rect = self.rect
+
         self.rect.x = settings.PLAYER_WIDTH
         self.rect.y = settings.PLAYER_HEIGHT
         self.speed = settings.PLAYER_SPEED
         self.animation_delay = settings.ANIMATION_DELAY
+
         self.last_update = pygame.time.get_ticks()
         # Set the player's attacking state
         self.attacking = False
@@ -60,7 +63,7 @@ class Player(sprite.Sprite):
         self.position = (0, 0)
         # Set the player's direction
         self.direction = "right"
-        
+
     def move(self, dx, dy):
         self.images = self.images_walking
         self.rect.x += dx * self.speed
