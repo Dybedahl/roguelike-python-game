@@ -31,7 +31,7 @@ class Player(sprite.Sprite):
         move: Move the player based on the given x and y coordinates.
         attack: Attack with the player.
         update: Update the player's image based on the current animation.
-    """    
+    """
     def __init__(self):
         super().__init__()
         # Load the player images as a list
@@ -62,16 +62,16 @@ class Player(sprite.Sprite):
         # Set the player's walking state
         self.walking = False
 
-    """ Move the player based on the given x and y coordinates.
-    
-    Args:
-        dx (int): The x coordinate.
-        dy (int): The y coordinate.
-        
-    Returns:
-        None
-    """
     def move(self, dx, dy):
+        """ Move the player based on the given x and y coordinates.
+        
+        Args:
+            dx (int): The x coordinate.
+            dy (int): The y coordinate.
+            
+        Returns:
+            None
+        """
         self.rect.x += dx * self.speed
         self.rect.y += dy * self.speed
 
@@ -86,15 +86,15 @@ class Player(sprite.Sprite):
         self.rect.x = max(0, min(self.rect.x, settings.SCREEN_WIDTH - settings.PLAYER_WIDTH))
         self.rect.y = max(0, min(self.rect.y, settings.SCREEN_HEIGHT - settings.PLAYER_HEIGHT))
 
-    """ Attack with the player.
-    
-    Args:
-        None
-        
-    Returns:
-        None
-    """
     def attack(self):
+        """ Attack with the player.
+        
+        Args:
+            None
+            
+        Returns:
+            None
+        """
         # Reset image index to start attack animation from the beginning
         self.image_index = 0
 
@@ -104,15 +104,15 @@ class Player(sprite.Sprite):
         # Set attacking flag to True
         self.attacking = True
 
-    """ Update the player's image based on the current animation.
-    
-    Args:
-        None
-        
-    Returns:
-        None
-    """
     def update(self):
+        """ Update the player's image based on the current animation.
+        
+        Args:
+            None
+            
+        Returns:
+            None
+        """
         # Update player's image based on current animation
         now = pygame.time.get_ticks()
         if now - self.last_update > self.animation_delay:
