@@ -5,9 +5,33 @@ The player entity.
 # Import the necessary modules
 from pygame import image, sprite
 import pygame
-import utils.settings as settings
+from utils import settings
 
 class Player(sprite.Sprite):
+    """ The player entity.
+
+    Args:
+        sprite (Sprite): The base class for all the game objects.
+        
+    Attributes:
+        images_walking (list): The list of images for the player's walking animation.
+        images_attacking (list): The list of images for the player's attacking animation.
+        image_index (int): The index of the current image in the animation.
+        image (Surface): The current image of the player.
+        rect (Rect): The rectangle that represents the player's position and size.
+        screen_rect (Rect): The rectangle that represents the screen's position and size.
+        speed (int): The speed at which the player moves.
+        animation_delay (int): The delay between each animation frame.
+        last_update (int): The time of the last update.
+        attacking (bool): The flag that indicates if the player is attacking.
+        defending (bool): The flag that indicates if the player is defending.
+        walking (bool): The flag that indicates if the player is walking.
+        
+    Methods:
+        move: Move the player based on the given x and y coordinates.
+        attack: Attack with the player.
+        update: Update the player's image based on the current animation.
+    """    
     def __init__(self):
         super().__init__()
         # Load the player images as a list
@@ -37,32 +61,6 @@ class Player(sprite.Sprite):
         self.defending = False
         # Set the player's walking state
         self.walking = False
-        # Set the player's health
-        self.health = 100
-        # Set the player's damage
-        self.damage = 10
-        # Set the player's score
-        self.score = 0
-        # Set the player's level
-        self.level = 1
-        # Set the player's experience
-        self.experience = 0
-        # Set the player's experience needed to level up based on the level
-        self.experience_needed = 100 * self.level
-        # Set the player's defense
-        self.defense = 5
-        # Set the player's gold
-        self.gold = 0
-        # Set the player's inventory
-        self.inventory = []
-        # Set the player's equipped items
-        self.equipped_items = {"weapon": None, "armor": None, "shield": None}
-        # Set the player's status effects
-        self.status_effects = []
-        # Set the player's position
-        self.position = (0, 0)
-        # Set the player's direction
-        self.direction = "right"
 
     def move(self, dx, dy):
         self.images = self.images_walking
@@ -77,14 +75,8 @@ class Player(sprite.Sprite):
             self.last_update = now
 
         # Prevent the player from going out of the screen
-        if self.rect.x < 0:
-            self.rect.x = 0
-        if self.rect.x > settings.SCREEN_WIDTH - self.rect.width:
-            self.rect.x = settings.SCREEN_WIDTH - self.rect.width
-        if self.rect.y < 0:
-            self.rect.y = 0
-        if self.rect.y > settings.SCREEN_HEIGHT - self.rect.height:
-            self.rect.y = settings.SCREEN_HEIGHT - self.rect.height
+        self.rect.x = max(0, min(self.rect.x, settings.SCREEN_WIDTH - settings.PLAYER_WIDTH))
+        self.rect.y = max(0, min(self.rect.y, settings.SCREEN_HEIGHT - settings.PLAYER_HEIGHT))
 
     def attack(self):
         # Switch to attack images
@@ -111,4 +103,3 @@ class Player(sprite.Sprite):
             if self.attacking and self.image_index == len(self.images) - 1:
                 self.images = self.images_walking
                 self.attacking = False
-    
