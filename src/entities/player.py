@@ -11,14 +11,14 @@ class Player(sprite.Sprite):
     def __init__(self):
         super().__init__()
         # Load the player images as a list
-        self.images_walking = [image.load(settings.PLAYER_IMAGE_WALK_PATH + "0.png"), 
-                               image.load(settings.PLAYER_IMAGE_WALK_PATH + "1.png"), 
-                               image.load(settings.PLAYER_IMAGE_WALK_PATH + "2.png"), 
+        self.images_walking = [image.load(settings.PLAYER_IMAGE_WALK_PATH + "0.png"),
+                               image.load(settings.PLAYER_IMAGE_WALK_PATH + "1.png"),
+                               image.load(settings.PLAYER_IMAGE_WALK_PATH + "2.png"),
                                image.load(settings.PLAYER_IMAGE_WALK_PATH + "3.png")]
         
-        self.images_attacking = [image.load(settings.PLAYER_IMAGE_ATTACK_PATH + "0.png"), 
-                                 image.load(settings.PLAYER_IMAGE_ATTACK_PATH + "1.png"), 
-                                 image.load(settings.PLAYER_IMAGE_ATTACK_PATH + "2.png"), 
+        self.images_attacking = [image.load(settings.PLAYER_IMAGE_ATTACK_PATH + "0.png"),
+                                 image.load(settings.PLAYER_IMAGE_ATTACK_PATH + "1.png"),
+                                 image.load(settings.PLAYER_IMAGE_ATTACK_PATH + "2.png"),
                                  image.load(settings.PLAYER_IMAGE_ATTACK_PATH + "3.png")]
         
         self.image_index = 0
