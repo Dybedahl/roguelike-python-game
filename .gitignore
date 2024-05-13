@@ -1,0 +1,8 @@
+# Add .venv files to ignore list
+.venv
+
+# Add pycache folders to ignore list
+__pycache__
+
+# Add .DS_Store files to ignore list
+.DS_Store
