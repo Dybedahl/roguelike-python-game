@@ -51,7 +51,6 @@ class Player(sprite.Sprite):
 
         self.rect.x = settings.PLAYER_WIDTH
         self.rect.y = settings.PLAYER_HEIGHT
-        self.speed = settings.PLAYER_SPEED
         self.animation_delay = settings.ANIMATION_DELAY
 
         self.last_update = pygame.time.get_ticks()
@@ -72,8 +71,8 @@ class Player(sprite.Sprite):
         Returns:
             None
         """
-        self.rect.x += dx * self.speed
-        self.rect.y += dy * self.speed
+        self.rect.x += dx * settings.PLAYER_SPEED
+        self.rect.y += dy * settings.PLAYER_SPEED
 
         # Update the player's image index to animate movement
         now = pygame.time.get_ticks()
@@ -122,5 +121,6 @@ class Player(sprite.Sprite):
 
             # If the attack animation has finished, switch back to walking images
             if self.attacking and self.image_index == len(self.images_attacking) - 1:
-                self.images = self.images_walking
+                self.image_index = 0
+                self.image = self.images_walking[self.image_index]
                 self.attacking = False
