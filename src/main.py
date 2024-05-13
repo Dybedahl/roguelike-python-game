@@ -12,7 +12,7 @@ def main():
     # Initialize the game
     init()
     screen = display.set_mode((settings.SCREEN_WIDTH, settings.SCREEN_HEIGHT))
-    display.set_caption("Rougelike Game")
+    display.set_caption("Rougelike Game by Dybedahl")
     
     # Set the game tick
     clock = pygame.time.Clock()
