@@ -15,25 +15,19 @@ class Player(sprite.Sprite):
                                image.load(settings.PLAYER_IMAGE_WALK_PATH + "1.png"),
                                image.load(settings.PLAYER_IMAGE_WALK_PATH + "2.png"),
                                image.load(settings.PLAYER_IMAGE_WALK_PATH + "3.png")]
-        
         self.images_attacking = [image.load(settings.PLAYER_IMAGE_ATTACK_PATH + "0.png"),
                                  image.load(settings.PLAYER_IMAGE_ATTACK_PATH + "1.png"),
                                  image.load(settings.PLAYER_IMAGE_ATTACK_PATH + "2.png"),
                                  image.load(settings.PLAYER_IMAGE_ATTACK_PATH + "3.png")]
-        
         self.image_index = 0
         self.image = self.images_walking[self.image_index]
-        
         self.rect = self.image.get_rect()
         self.screen_rect = self.rect
-        
         self.rect.x = settings.PLAYER_WIDTH
         self.rect.y = settings.PLAYER_HEIGHT
         self.speed = settings.PLAYER_SPEED
-
         self.animation_delay = settings.ANIMATION_DELAY
         self.last_update = pygame.time.get_ticks()
-        
         # Set the player's attacking state
         self.attacking = False
         # Set the player's defense state
@@ -71,14 +65,14 @@ class Player(sprite.Sprite):
         self.images = self.images_walking
         self.rect.x += dx * self.speed
         self.rect.y += dy * self.speed
-        
+
         # Update the player's image index to animate movement
         now = pygame.time.get_ticks()
         if now - self.last_update > self.animation_delay:
             self.image_index = (self.image_index + 1) % len(self.images)
             self.image = self.images[self.image_index]
             self.last_update = now
-        
+
         # Prevent the player from going out of the screen
         if self.rect.x < 0:
             self.rect.x = 0
@@ -88,11 +82,11 @@ class Player(sprite.Sprite):
             self.rect.y = 0
         if self.rect.y > settings.SCREEN_HEIGHT - self.rect.height:
             self.rect.y = settings.SCREEN_HEIGHT - self.rect.height
-            
+
     def attack(self):
         # Switch to attack images
         self.images = self.images_attacking
-        
+
         # Reset image index to start attack animation from the beginning
         self.image_index = 0
 
@@ -101,7 +95,7 @@ class Player(sprite.Sprite):
 
         # Set attacking flag to True
         self.attacking = True
-        
+
     def update(self):
         # Update player's image based on current animation
         now = pygame.time.get_ticks()
