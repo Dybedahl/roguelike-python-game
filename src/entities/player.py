@@ -46,6 +46,7 @@ class Player(sprite.Sprite):
 
         self.image_index = 0
         self.image = self.images_walking[self.image_index]
+        self.image = pygame.transform.scale(self.image, (settings.PLAYER_WIDTH, settings.PLAYER_HEIGHT))
         self.rect = self.image.get_rect()
         self.screen_rect = self.rect
 
@@ -79,6 +80,7 @@ class Player(sprite.Sprite):
         if now - self.last_update > self.animation_delay:
             self.image_index = (self.image_index + 1) % len(self.images_walking)
             self.image = self.images_walking[self.image_index]
+            self.image = pygame.transform.scale(self.image, (settings.PLAYER_WIDTH, settings.PLAYER_HEIGHT))
             self.last_update = now
 
         # Prevent the player from going out of the screen
@@ -117,10 +119,12 @@ class Player(sprite.Sprite):
         if now - self.last_update > self.animation_delay:
             self.image_index = (self.image_index + 1) % len(self.images_attacking)
             self.image = self.images_attacking[self.image_index]
+            self.image = pygame.transform.scale(self.image, (settings.PLAYER_WIDTH, settings.PLAYER_HEIGHT))
             self.last_update = now
 
             # If the attack animation has finished, switch back to walking images
             if self.attacking and self.image_index == len(self.images_attacking) - 1:
                 self.image_index = 0
                 self.image = self.images_walking[self.image_index]
+                self.image = pygame.transform.scale(self.image, (settings.PLAYER_WIDTH, settings.PLAYER_HEIGHT))
                 self.attacking = False
