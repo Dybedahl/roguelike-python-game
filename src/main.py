@@ -7,8 +7,7 @@ from utils import settings
 from pygame import display, event, QUIT
 from entities.player import Player
 from utils.player_movement import PlayerMovement
-from maps.map import GameMap
-from maps.map_renderer import MapRenderer
+from maps.map_manager import MapManager
 
 
 def main():
@@ -30,12 +29,10 @@ def main():
     # Initialize the player movement
     player_movement = PlayerMovement(player)
     
-    # Initialize the map generation
-    game_map = GameMap(settings.MAP_WIDTH, settings.MAP_HEIGHT)
-    game_map.generate_map()
-    
-    # Initialize the map renderer
-    map_renderer = MapRenderer(game_map)
+    # Initialize the game map
+    game_map = MapManager(settings.MAP_WIDTH, settings.MAP_HEIGHT)
+    game_map.load_map()
+    game_map.render_map(screen)
     
     
     # Load the game
@@ -59,7 +56,7 @@ def main():
         
         # Draw the player on the screen
         screen.fill((255, 255, 255))  # Clear the screen
-        map_renderer.render(screen)
+        game_map.render_map(screen)
         screen.blit(player.image, player.rect)
         
         
